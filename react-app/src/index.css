@@ -12,7 +12,11 @@ html{
   font-size: 62.5%;
 }
 
-body{
+/* body{
   box-sizing: border-box;
-  /* padding: ; */
+  padding: 3rem
+} */
+
+:root{
+  --theme: #1877f2;
 }
