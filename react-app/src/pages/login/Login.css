@@ -5,12 +5,28 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: sans-serif;
+}
+
+.loginDesPrimary{
+  font-size: 1.8rem;
+
+  .loginDesPrimaryBig{
+    color: var(--theme);
+    font-weight: 800;
+  }
+}
+
+.loginDesSecondary{
+  margin-top: 2rem;
+  font-size: 1.6rem;
 }
 
 .loginWrapper{
   width: 80%;
   display: flex;
 }
+
 .loginLeft{
     display: flex;
     flex-direction: column;
@@ -20,10 +36,8 @@
 }
 
 .loginLogo{
-  font-size: 60px;
-  font-weight: 800;
-  color: var(--theme);
-  margin-bottom: 10px;
+  width: 19.5rem;
+  height: 19.5rem;
 }
 
 .loginRight{

@@ -8,6 +8,7 @@ import {login} from '../../store/session'
 
 // style
 import './Login.css'
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 const Login = () => {
   const sessionUser = useSelector(state => state.session.user)
@@ -41,7 +42,24 @@ const Login = () => {
 
     <div className="loginWrapper">
       <div className="loginLeft">
-      <h3 className="loginLogo">AI Tutorial</h3>
+      <p className='loginDesPrimary'>
+      <b className='loginDesPrimaryBold'>Hi I'm</b>
+      <big className='loginDesPrimaryBig'> Course Corrent </big>
+      the AI tutoring platform that helps you
+       prepare for your exams.
+      </p>
+
+      <p className="loginDesSecondary">
+        We offer interactive execises, and real-time feedback to help
+        you master your coursework. Our AI tutors are available
+        24/7 to answer your questions and help you stay on track.
+      </p>
+
+      <img
+      src="images/LoginLogo.png"
+      alt="login logo"
+      className="loginLogo"
+      />
 
       </div>
 
@@ -50,8 +68,15 @@ const Login = () => {
         <div className="loginBox">
 
           <div className="bottom">
-
             <form onSubmit={handleSubmit} className="bottomBox">
+              <div>
+                  <h2 className='bottomBoxHeading'>Create your account</h2>
+                  <p className='bottomBoxHeadingDes'>
+                    Start your free trial today and see how Course
+                    Corrent can help you succeed.
+                  </p>
+
+              </div>
 
               <input
               type="email"
