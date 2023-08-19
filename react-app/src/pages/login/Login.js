@@ -48,7 +48,7 @@ const Login = () => {
       <div className="loginLeft">
         <p className='loginDesPrimary'>
           <b className='loginDesPrimaryBold'>Hi I'm</b>
-          <big className='loginDesPrimaryBig'> Course Corrent </big>
+          <big className='loginDesPrimaryBig'> Course Correct </big>
           the AI tutoring platform that helps you
            prepare for your exams.
         </p>
@@ -74,7 +74,7 @@ const Login = () => {
           <div className="loginFormBox">
             <form onSubmit={handleSubmit} className="loginForm">
               <div className=''>
-                  <h2 className='loginBottomBoxHeading'>Create your account</h2>
+                  <h2 className='loginBottomBoxHeading'>Login to your account</h2>
                   <p className='logingBottomBoxHeadingDes'>
                     Start your free trial today and see how Course
                     Corrent can help you succeed.
