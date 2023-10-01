@@ -1,0 +1,43 @@
+/* .questionAnswerInput{
+  display: flex;
+  justify-content: space-between;
+} */
+
+.questionAnswerInputBox{
+  /* display: flex;
+  justify-content: space-between; */
+  /* align-items: center; */
+}
+
+.questionAnswerInput{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.answerQuestionInputItem{
+  display: flex;
+  align-items: center;
+}
+
+.answerQuestionInputLabel{
+  padding-right: 1rem;
+}
+
+.questionAnswerInputButtonDiv{
+  object-fit: contain;
+}
+
+.questionAnswerInputButton{
+  display: flex;
+  width: 15rem;
+  padding-left: 2rem;
+  padding-top: .5rem;
+  height: 2rem;
+  align-items: center;
+  /* margin-left: 3000% */
+}
+
+.questionAnswerInputWrapper{
+  display: flex;
+}

@@ -10,6 +10,7 @@
 
 html{
   font-size: 62.5%;
+  font-family: sans-serif;
 }
 
 /* body{
@@ -18,5 +19,67 @@ html{
 } */
 
 :root{
-  --theme: #1877f2;
+  --theme: #095bc8;
+  --marging-bottom-small: 1.5rem;
+  --default-font-size: 1.6rem;
 }
+
+.marging-bottom-small{
+  margin-bottom: 1.5rem;
+}
+
+.HeaderSecondary{
+  padding-left: 1%;
+  padding-top: 1%;
+  font-weight: 800;
+  font-family: sans-serif;
+  color: var(--theme);
+  font-size: 18px;
+}
+
+.headerTertiary{
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.row {
+  max-width: 80rem;
+  margin: 0 auto;
+}
+  .row:not(:last-child) {
+      margin-bottom: 8rem;
+  }
+
+
+  [class^="col-"] {
+      float: left;
+
+      &:not(:last-child) {
+          margin-right: 6rem;
+      }
+  }
+
+  .col-1-of-2 {
+      width: calc((100% - 6rem) / 2);
+
+  }
+
+  .col-1-of-3 {
+      width: calc((100% - 2 * 7rem) / 3);
+  }
+
+  .col-2-of-3 {
+      width: calc(2 * ((100% - 2 * 6rem) / 3) + 6rem);
+  }
+
+  .col-1-of-4 {
+      width: calc((100% - 3 * 6rem) / 4);
+  }
+
+  .col-2-of-4 {
+      width: calc(2 * ((100% - 3 * 6rem) / 4) + 6rem);
+  }
+
+  .col-3-of-4 {
+      width: calc(3 * ((100% - 3 * 6rem) / 4) + 2 * 6rem);
+  }
