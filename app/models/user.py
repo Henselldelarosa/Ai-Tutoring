@@ -13,6 +13,9 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    language = db.Column(db.String(255))
+    grade = db.Column(db.Integer)
+    learning_goal = db.Column(db.String(255))
 
     @property
     def password(self):
@@ -29,5 +32,8 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'language': self.language,
+            'grade': self.grade,
+            'learning_goal': self.learning_goal
         }

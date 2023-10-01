@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import Login from "./pages/login/Login";
 import Home from "./pages/home/Home";
 import Signup from "./pages/signup/Signup";
+import Debug from "./components/Debug";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,6 +26,10 @@ function App() {
 
       <Route path='/register'>
         <Signup/>
+      </Route>
+
+      <Route path='/debug'>
+        <Debug />
       </Route>
 
       <Route path='/'>
