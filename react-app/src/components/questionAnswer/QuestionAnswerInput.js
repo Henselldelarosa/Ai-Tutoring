@@ -27,7 +27,10 @@ const QuestionAnswerInput = () => {
         </div>
 
       <div className="questionAnswerInputButtonDiv">
-        <button className="questionAnswerInputButton">Generate Question <ReplayOutlinedIcon/></button>
+        <button className="questionAnswerInputButton">
+          <p>Generate Question</p>
+          <ReplayOutlinedIcon className='questionAnswerButtonIcon'/>
+        </button>
       </div>
 
       {/* <div className="col-1-of-3">

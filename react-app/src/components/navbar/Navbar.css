@@ -1,0 +1,41 @@
+.navbar{
+  background-color: var(--theme);
+  width: 100%;
+  height: 5rem;
+  position: sticky;
+  top: 0;
+}
+
+.navar__wrapper{
+  display: flex;
+  justify-content: space-between;
+}
+
+.navar__wrapper{
+
+}
+
+.navar__left{
+  display: flex;
+  align-items: center;
+}
+
+.navbar__left--title{
+  padding-left: 10px;
+  color: white;
+}
+
+.navar__left--logo{
+  width: 5rem;
+  height: 100%;
+  object-fit: cover;
+}
+
+.navbar__right{
+  display: flex;
+  align-items: center;
+}
+
+.navbar__right--username{
+  color:white;
+}
