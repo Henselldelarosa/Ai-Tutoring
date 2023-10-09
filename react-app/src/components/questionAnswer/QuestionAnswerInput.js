@@ -1,8 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './QuestionAnswerInput.css'
 import ReplayOutlinedIcon from '@mui/icons-material/ReplayOutlined';
 
 const QuestionAnswerInput = () => {
+
+    const [question, setQuestion] = useState('');
+
+    async function handleClick(e){
+        e.preventDefault();
+        const res = await fetch('/api/openai/generate_question', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({}),
+        })
+        const data = await res.json();
+        setQuestion(data.question);
+    }
   return (
     <div className='questionAnswerInputBox marging-bottom-small'>
 
@@ -27,7 +42,7 @@ const QuestionAnswerInput = () => {
         </div>
 
       <div className="questionAnswerInputButtonDiv">
-        <button className="questionAnswerInputButton">
+        <button className="questionAnswerInputButton" onClick={handleClick}>
           <p>Generate Question</p>
           <ReplayOutlinedIcon className='questionAnswerButtonIcon'/>
         </button>
@@ -37,6 +52,11 @@ const QuestionAnswerInput = () => {
       &nbsp;
       </div> */}
 
+      </div>
+
+      <div>
+        <h1>Question</h1>
+        {question ? question : ''}
       </div>
     </div>
   )
