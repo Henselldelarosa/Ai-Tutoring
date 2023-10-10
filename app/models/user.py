@@ -2,7 +2,6 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
-
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
@@ -16,7 +15,13 @@ class User(db.Model, UserMixin):
     language = db.Column(db.String(255))
     grade = db.Column(db.Integer)
     learning_goal = db.Column(db.String(255))
-
+    
+    # Additional fields for managing subscriptions and payment information
+    subscription_start_date = db.Column(db.Date)
+    subscription_end_date = db.Column(db.Date)
+    credits = db.Column(db.Integer, default=0)
+    # You can add more fields for payment info as needed
+    
     @property
     def password(self):
         return self.hashed_password
@@ -35,5 +40,10 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'language': self.language,
             'grade': self.grade,
-            'learning_goal': self.learning_goal
+            'learning_goal': self.learning_goal,
+            'subscription_start_date': self.subscription_start_date,
+            'subscription_end_date': self.subscription_end_date,
+            'credits': self.credits,
+            # Include other fields as needed for payment info
         }
+
