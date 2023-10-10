@@ -31,47 +31,76 @@ def authenticate():
 @auth_routes.route('/login', methods=['POST'])
 def login():
     """
-    Logs a user in
+    Logs a user in.
     """
     form = LoginForm()
-    # Get the csrf_token from the request cookie and put it into the
-    # form manually to validate_on_submit can be used
-    form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
-        # Add the user to the session, we are logged in!
-        user = User.query.filter(User.email == form.data['email']).first()
-        login_user(user)
-        return user.to_dict()
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
+    # Ensure CSRF token is present in the request
+    csrf_token = request.cookies.get('csrf_token')
+    if not csrf_token:
+        return jsonify({'errors': ['CSRF token missing']}), 401
+
+    form['csrf_token'].data = csrf_token
+
+    if form.validate_on_submit():
+        email = form.data['email']
+        password = form.data['password']
+
+        # Find the user by email
+        user = User.query.filter_by(email=email).first()
+
+        if user and user.check_password(password):
+            login_user(user)
+            return jsonify(user.to_dict())
+    
+    return jsonify({'errors': ['Invalid email or password']}), 401
 
 @auth_routes.route('/logout')
+@login_required
 def logout():
     """
-    Logs a user out
+    Logs a user out.
     """
     logout_user()
-    return {'message': 'User logged out'}
-
+    return jsonify({'message': 'User logged out'})
 
 @auth_routes.route('/signup', methods=['POST'])
 def sign_up():
     """
-    Creates a new user and logs them in
+    Creates a new user and sends a verification email.
     """
-    form = SignUpForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
-        user = User(
-            username=form.data['username'],
-            email=form.data['email'],
-            password=form.data['password']
-        )
-        db.session.add(user)
+    data = request.get_json()
+    username = data.get('username')
+    email = data.get('email')
+    password = data.get('password')
+
+    if not username or not email or not password:
+        return jsonify({'message': 'Username, email, and password are required'}), 400
+
+    # Validate email format using a library or regex pattern
+    if not validate_email_format(email):
+        return jsonify({'message': 'Invalid email format'}), 400
+
+    # Check if the email is already in use
+    if User.query.filter_by(email=email).first():
+        return jsonify({'message': 'Email already in use'}), 400
+
+    # Create the user and send a verification email
+    user = User(username=username, email=email)
+    user.set_password(password)
+
+    db.session.add(user)
+
+    try:
         db.session.commit()
-        login_user(user)
-        return user.to_dict()
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+        
+        # Send a verification email with a verification link
+        send_verification_email(user)
+
+        return jsonify({'message': 'User registered successfully. Check your email for verification instructions.'})
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'message': 'Failed to register user', 'error': str(e)}), 500
 
 
 @auth_routes.route('/unauthorized')
