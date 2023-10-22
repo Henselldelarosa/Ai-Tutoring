@@ -7,14 +7,16 @@ import './Navigation.css';
 function Navigation({isLoaded}) {
   const sessionUser = useSelector(state => state.session.user);
 
-  return (<ul> {/* <li>
+  return (<ul>
+		<li>
 				<NavLink exact to="/">Home</NavLink>
 			</li>
 			{isLoaded && (
 				<li>
 					<ProfileButton user={sessionUser} />
 				</li>
-			)} */} </ul>);
+			)}
+			</ul>);
 }
 
 export default Navigation;

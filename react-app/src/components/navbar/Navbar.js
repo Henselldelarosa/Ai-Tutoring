@@ -4,8 +4,7 @@ import { useSelector } from 'react-redux'
 import DropDown from '../buttons/dropDown/DropDown'
 
 const Navbar = ({isLoaded, sessionUser}) => {
-
-  return (
+  let content = (
     <div className='navbar'>
       <div className="navar__wrapper">
 
@@ -25,6 +24,7 @@ const Navbar = ({isLoaded, sessionUser}) => {
       </div>
     </div>
   )
+  return (content, isLoaded)
 }
 
 export default Navbar
