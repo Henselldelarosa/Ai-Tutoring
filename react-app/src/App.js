@@ -31,7 +31,10 @@ function App() {
         <Home/>
       </Route>
     </Switch>)
-  } </>);
+  }
+  </>
+  )
+  ;
 }
 
 export default App;

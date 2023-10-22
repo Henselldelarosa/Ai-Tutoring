@@ -1,0 +1,31 @@
+.home{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+.home__wrapper{
+  justify-content: space-around;
+  height: 85vh;
+}
+
+.home__hr{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 4rem;
+  margin-right: 2rem;
+}
+
+.hr{
+  width: 60rem;
+  background-color: red;
+  padding-right: 2rem;
+  padding-left: 4rem;
+}
+
+.hr__or{
+  font-weight: 500;
+  font-size: 1.9rem;
+}
