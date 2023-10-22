@@ -11,9 +11,9 @@ const QuestionAnswer = () => {
   return (
     <div className='questionAnswer'>
       <div className="questionAnswerWrapper">
-        <h2 className="questionAnswerHeader HeaderSecondary">
+        {/* <h2 className="questionAnswerHeader HeaderSecondary">
           Course Correct
-        </h2>
+        </h2> */}
 
         <div className="questionAnswerCenter">
           <div className="questionAnswerTop">
