@@ -77,25 +77,25 @@ def sign_up():
     if not username or not email or not password:
         return jsonify({'message': 'Username, email, and password are required'}), 400
 
-    # Validate email format using a library or regex pattern
-    if not validate_email_format(email):
-        return jsonify({'message': 'Invalid email format'}), 400
+    # # Validate email format using a library or regex pattern
+    # if not validate_email_format(email):
+    #     return jsonify({'message': 'Invalid email format'}), 400
 
     # Check if the email is already in use
     if User.query.filter_by(email=email).first():
         return jsonify({'message': 'Email already in use'}), 400
 
     # Create the user and send a verification email
-    user = User(username=username, email=email)
-    user.set_password(password)
+    user = User(username=username, email=email, password=password)
+    # user.set_password(password)
 
     db.session.add(user)
 
     try:
         db.session.commit()
         
-        # Send a verification email with a verification link
-        send_verification_email(user)
+        # # Send a verification email with a verification link
+        # send_verification_email(user)
 
         return jsonify({'message': 'User registered successfully. Check your email for verification instructions.'})
     except Exception as e:
