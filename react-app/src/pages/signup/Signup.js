@@ -9,7 +9,6 @@ import {signUp} from '../../store/session'
 // style
 import './Signup.css'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
@@ -50,15 +49,16 @@ const Signup = () => {
           <p className='signUpDesPrimary'>
             <b className='signUpDesPrimaryBold'>Hi I'm </b>
             <big className='signUpDesPrimaryBig'>
-               Course Correct </big>
-              the AI tutoring platform that helps you
-                           prepare for your exams.
+              Course Correct
+            </big>
+            the AI tutoring platform that helps you
+            prepare for your exams.
           </p>
 
           <p className="signUpDesSecondary">
             We offer interactive execises, and real-time feedback to help
-                          you master your coursework. Our AI tutors are available
-                          24/7 to answer your questions and help you stay on track.
+            you master your coursework. Our AI tutors are available
+            24/7 to answer your questions and help you stay on track.
           </p>
 
           <img src="images/LoginLogo.png" alt="signUp logo" className="signUpLogo"/>

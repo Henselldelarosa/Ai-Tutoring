@@ -8,6 +8,7 @@ const Debug = () => {
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
   const [feedback, setFeedback] = useState('');
+  const [userQuestion, setUserQuestion] = useState('');
   
   const getQuestion = async (e) => {
     e.preventDefault();
@@ -71,7 +72,26 @@ const Debug = () => {
     }
   };
 
+  const askQuestion = async (e) => {
+    e.preventDefault();
 
+    if(!userQuestion) return;
+    const data = { user_question: userQuestion };
+    try {
+      const response = await fetch('/api/openai/answer_question', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+      console.log(response)
+      const answer = await response.json();
+      setFeedback(answer.generated_answer);
+    } catch (error) {
+      console.error(error);
+    }
+  }
   
   // stuff for user routes
   const [loading, setLoading] = useState(true);
@@ -217,6 +237,17 @@ const Debug = () => {
         <h3>AI Feedback</h3>
         { feedback ? <p>{feedback}</p> : ''}
         <br />
+
+        <h3>Ask Your Own Question</h3>
+        <form onSubmit={askQuestion}>
+          <label>Question:</label>
+          <input
+            type='text'
+            value={userQuestion}
+            onChange={(e) => setUserQuestion(e.target.value)}
+          />
+          <button type="submit">Ask Your Question</button>
+        </form>
 
       </div>
 

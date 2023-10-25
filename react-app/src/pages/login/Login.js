@@ -1,7 +1,7 @@
 // libraries
 import React, {useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {NavLink, Redirect, useHistory} from 'react-router-dom/cjs/react-router-dom.min'
+import {NavLink, Redirect } from 'react-router-dom/cjs/react-router-dom.min'
 
 // thunk
 import {login} from '../../store/session'
@@ -15,7 +15,6 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 const Login = () => {
   const sessionUser = useSelector(state => state.session.user)
-  const history = useHistory()
   const dispatch = useDispatch()
 
   // state
@@ -26,10 +25,6 @@ const Login = () => {
 
   if (sessionUser)
     return <Redirect to='/' />
-
-
-
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();

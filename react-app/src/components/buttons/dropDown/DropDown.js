@@ -3,9 +3,9 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Avatar } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import * as sessionAction from '../../../store/session'
-import { useHistory, Redirect, } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import './DropDown.css'
@@ -13,7 +13,6 @@ import './DropDown.css'
 const DropDown = () => {
   const dispatch = useDispatch()
   const history = useHistory()
-  const sessionUser = useSelector(state => state.session.user)
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {

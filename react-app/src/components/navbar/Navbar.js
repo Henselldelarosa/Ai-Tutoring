@@ -1,6 +1,5 @@
 import React from 'react'
 import './Navbar.css'
-import { useSelector } from 'react-redux'
 import DropDown from '../buttons/dropDown/DropDown'
 
 const Navbar = ({isLoaded, sessionUser}) => {
