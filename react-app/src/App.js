@@ -10,15 +10,15 @@ import Navbar from "./components/navbar/Navbar";
 
 function App() {
   const dispatch = useDispatch();
-  const sessionUser = useSelector(state => state.session.user)
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
   return (<>
-    <Navbar sessionUser={sessionUser} isLoaded={isLoaded}/> {
-    isLoaded && (<Switch>
+    <Navbar isLoaded={isLoaded}/>
+    {isLoaded && (
+    <Switch>
       <Route path='/login'>
         <Login/>
       </Route>
@@ -34,7 +34,9 @@ function App() {
       <Route path='/'>
         <Home/>
       </Route>
-    </Switch>)
+
+    </Switch>
+    )
   }
   </>
   )

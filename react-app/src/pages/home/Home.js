@@ -14,12 +14,12 @@ function Home() {
           Course Correct
       </h2>
       <div className="home__wrapper">
-      <Questions/>
       <QuestionAnswer/>
+      <Questions/>
       </div>
-      <div className="home__hr">
+      {/* <div className="home__hr">
       <hr className='hr'/> <p className='hr__or'>OR</p> <hr className='hr'/>
-      </div>
+      </div> */}
 
 
 

@@ -1,9 +1,13 @@
 import React from 'react'
 import './Navbar.css'
 import DropDown from '../buttons/dropDown/DropDown'
+import { useSelector } from 'react-redux'
 
-const Navbar = ({isLoaded, sessionUser}) => {
-  let content = (
+const Navbar = ({isLoaded}) => {
+  const sessionUser = useSelector(state => state.session.user)
+  let content;
+  if(sessionUser){
+   content = (
     <div className='navbar'>
       <div className="navar__wrapper">
 
@@ -22,7 +26,15 @@ const Navbar = ({isLoaded, sessionUser}) => {
         </div>
       </div>
     </div>
-  )
+    )
+   }
+   else{
+    content = (
+      <div>
+        
+      </div>
+    )
+   }
   return (content, isLoaded)
 }
 

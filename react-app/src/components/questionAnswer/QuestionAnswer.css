@@ -1,7 +1,110 @@
-.questionAnswer{
+.questions{
   width: 100vw;
   height: 25vh;
-  padding-top: 5%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  justify-content: center;
+}
+
+.questions__subject--inputs{
+  display: flex;
+  justify-content: space-between;
+}
+
+.questions__subject--form{
+  justify-content: center;
+  border: .3rem solid lightgray;
+}
+
+.questions__subject--inputs-input{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: .1rem solid var(--theme);
+  height: 6rem;
+  justify-content: center;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.questions__subject{
+  display: none;
+}
+
+.questions__label--icon{
+  color: var(--theme);
+  cursor: pointer;
+}
+
+.questions__label--text{
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.active{
+  background-color: lightgray;
+}
+
+
+
+/* .questions{
+  width: 100vw;
+  height: 25vh;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  justify-content: center;
+}
+
+
+.questions__subject--inputs-input{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: .1rem solid var(--theme);
+  height: 5rem;
+  justify-content: center;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.questions__subject{
+  display: none;
+}
+
+
+.questions__subject--icon__label{
+  height: 100%;
+  width: 100%;
+  border: .5rem solid var(--theme);
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  top: -.4rem;
+}
+
+.questions__subject--icon__label::after{
+  content: "";
+  display: block;
+  height: 1.3rem;
+  width: 1.3rem;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--theme);
+  opacity: 0;
+  transition: opacity .2s;
+}
+
+.question__subject:checked ~ .uestion__subject--icon .questions__subject--icon__label::after{
+  opacity: 1;
+} */
+/* .questionAnswer{
+  width: 100vw;
+  height: 25vh;
+  margin-top: 5%;
+  margin-bottom: 5%;
 }
 
 .questionAnswerCenter{
@@ -65,4 +168,13 @@
 
 .questionAnswerSubjectIcon{
   color: var(--theme);
+} */
+
+/* .subject__input{
+  display: none;
 }
+
+.subject__label{
+  cursor: pointer;
+  padding-left: 4.5rem;
+} */

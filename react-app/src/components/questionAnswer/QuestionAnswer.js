@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState, useEffect} from 'react'
 
 // style
 import './QuestionAnswer.css'
@@ -8,82 +8,162 @@ import BiotechOutlinedIcon from '@mui/icons-material/BiotechOutlined';
 import QuestionAnswerInput from './QuestionAnswerInput';
 
 const QuestionAnswer = () => {
+  const [difficulty, setDifficulty] = useState('easy');
+  const [subject, setSubject] = useState(null);
+  const [question, setQuestion] = useState('');
+  const [answer, setAnswer] = useState('');
+  const [feedback, setFeedback] = useState('');
+  const [userQuestion, setUserQuestion] = useState('');
+
+  console.log(subject)
+  const getQuestion = async (e) => {
+    e.preventDefault();
+
+    // Reset all useStates
+    setQuestion('');
+    setAnswer('');
+    setFeedback('');
+    // would be good to have 'loading' to show app is working
+
+    // Send the selected options to the Flask backend
+    const data = { difficulty, subject };
+    try {
+      const response = await fetch('/api/openai/generate_question', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      // Handle the response as needed
+      const q = await response.json()
+      setQuestion(q.question);
+
+    } catch (error) {
+      // Handle any errors
+      console.error(error);
+    }
+  };
+
   return (
-    <div className='questionAnswer'>
-      <div className="questionAnswerWrapper">
-        {/* <h2 className="questionAnswerHeader HeaderSecondary">
-          Course Correct
-        </h2> */}
+    <div className='questions'>
+      <div className="questions__wrapper">
+        <div className="questions__center">
+          <div className="questions__top">
+            <form onSubmit={getQuestion} className='questions__subject--form row'>
+              <div className="questions__subject--inputs">
 
-        <div className="questionAnswerCenter">
-          <div className="questionAnswerTop">
+                <label htmlFor='chemistry' className={subject !== 'chemistry'? "questions__subject--inputs-input col-1-of-3" : "questions__subject--inputs-input col-1-of-3 active"}>
+                  <input
+                  type="radio"
+                  name="subject"
+                  id="chemistry"
+                  className="questions__subject"
+                  value='chemistry'
+                  checked={subject === 'chemistry'}
+                  onChange={() => setSubject('chemistry')}
+                  />
 
-          <h3 className="questionAnswerBoxHeading headerTertiary">
-            Revise quickly with your Ai assistant
-          </h3>
+                  <label htmlFor="chemistry" className="questions__label--icon">
+                  <ScienceOutlinedIcon style={{fontSize: '3rem'}}/>
+                  </label>
 
-          <span className="questionAnswerCounter">
-            <b className='counter'>10/10</b> <p>Question left</p>
-          </span>
-          </div>
-        </div>
+                  <label htmlFor="chemistry" className="questions__label--text">
+                    chemistry
+                  </label>
 
-        <div className="questionAnswerSubjectBox row">
-          <p className="questionAnswerDescription">
-            select a subject and a difficulty, then click the "Generate Question"
-            button for a question. Solve it, check your answers with the 'Answer'
-            button.
-          </p>
+                </label>
 
-        <div className="questionAnswerSubjectBoxSelect">
 
-          <div className="col-1-of-3">
+                <label htmlFor='physics' className={subject !== 'physics'? "questions__subject--inputs-input col-1-of-3" : "questions__subject--inputs-input col-1-of-3 active"}>
+                  <input
+                  type="radio"
+                  name="subject"
+                  id="physics"
+                  className={subject === 'physics'? 'questions__subject' : 'questions__subject active'}
+                  value='physics'
+                  checked={subject === 'physics'}
+                  onChange={() => setSubject('physics')}
+                  />
 
-            <div className="questionAnswerSubject">
+                  <label htmlFor="physics" className="questions__label--icon">
+                    <BiotechOutlinedIcon style={{fontSize: '3rem'}}/>
+                  </label>
 
-            <div className="centerItems">
-                <CalculateOutlinedIcon
-                className='questionAnswerSubjectIcon'
-                style={{fontSize:'3rem'}}/>
-                <p className="questionAnswerSubjectHeading">Mathematics</p>
-            </div>
+                  <label htmlFor="physics" className="questions__label--text">
+                    Physics
+                  </label>
 
-            </div>
+                </label>
 
-          </div>
 
-          <div className="col-1-of-3">
-            <div className="questionAnswerSubject">
-              <div className="centerItems">
 
-                <ScienceOutlinedIcon
-                className='questionAnswerSubjectIcon'
-                style={{fontSize:'3rem'}}/>
-                <p className="questionAnswerSubjectHeading">Chemistry</p>
-              </div>
+                <label htmlFor='math' className={subject !== 'math'? "questions__subject--inputs-input col-1-of-3" : "questions__subject--inputs-input col-1-of-3 active"}>
+                  <input
+                  type="radio"
+                  name="subject"
+                  id="math"
+                  className={subject === 'math'? 'questions__subject' : 'questions__subject active'}
+                  value='math'
+                  checked={subject === 'math'}
+                  onChange={() => setSubject('math')}
+                  />
 
-            </div>
-          </div>
+                  <label htmlFor="math" className="questions__label--icon">
+                  <CalculateOutlinedIcon style={{fontSize: '3rem'}}/>
+                  </label>
 
-          <div className="col-1-of-3">
-            <div className="questionAnswerSubject">
+                  <label htmlFor="math" className="questions__label--text">
+                    Mathematics
+                  </label>
+                </label>
 
-                <div className="centerItems">
-                  <BiotechOutlinedIcon
-                  className='questionAnswerSubjectIcon'
-                  style={{fontSize:'3rem'}}/>
-                  <p className="questionAnswerSubjectHeading">Physics</p>
+                <input
+                type="radio"
+                name="difficulty"
+                id="easy"
+                value='easy'
+                checked={difficulty === 'easy'}
+                onChange={() => setDifficulty('easy')}
+                />
+
+                <div className="questions__difficulty--group">
+                  <input
+                  type="radio"
+                  name="difficulty"
+                  id="medium"
+                  value='medium'
+                  checked={difficulty === 'medium'}
+                  onChange={() => setDifficulty('medium')}
+                  />
+
+                  <label htmlFor="hard" className='questions__difficulty--label'>
+                    <span className="questions__subject--button"></span>
+                    Medium
+                  </label>
+
+                </div>
+
+                <div className="questions__difficulty--group">
+                  <input
+                  type="radio"
+                  name="difficulty"
+                  id="hard"
+                  value='hard'
+                  checked={difficulty === 'hard'}
+                  onChange={() => setDifficulty('hard')}
+                  />
+
+                  <label htmlFor="hard" className='questions__difficulty--label'>
+                    <span className="questions__subject--button"></span>
+                    Hard
+                  </label>
+
                 </div>
               </div>
-            </div>
-
-
+            </form>
           </div>
-
-            <div className="questionAnswerInput">
-              <QuestionAnswerInput/>
-            </div>
-
         </div>
       </div>
     </div>

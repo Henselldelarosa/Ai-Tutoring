@@ -1,10 +1,11 @@
-.questions{
+/* .questions{
   width: 50%;
   place-content: center;
   margin-left: 40%;
   max-height: 40rem;
   padding-top: 10px;
   overflow-y: scroll;
+  margin-bottom: 10%;
 }
 
 .question__info{
@@ -77,4 +78,4 @@
 .answer__explain{
   font-size: 1.5rem;
   margin: 1rem;
-}
+} */
