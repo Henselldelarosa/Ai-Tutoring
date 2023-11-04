@@ -2,12 +2,8 @@ import os
 
 
 class Config:
-    SECRET_KEY = os.environ.get('SECRET_KEY')
+    SECRET_KEY = os.environ.get('SECRET_KEY')  # Set the SECRET_KEY environment variable in the Render dashboard
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    # SQLAlchemy 1.4 no longer supports url strings that start with 'postgres'
-    # (only 'postgresql') but heroku's postgres add-on automatically sets the
-    # url in the hidden config vars to start with postgres.
-    # so the connection uri must be updated here (for production)
-    SQLALCHEMY_DATABASE_URI = os.environ.get(
-        'DATABASE_URL').replace('postgres://', 'postgresql://')
-    SQLALCHEMY_ECHO = True
+    # Use the provided Render database URL directly
+    SQLALCHEMY_DATABASE_URI = "postgres://cousect_data_base_user:e21gc1pLQUIRsNS0PRZ3UUEKshzNXFtu@dpg-cl3756gt3kic73d8altg-a.oregon-postgres.render.com/cousect_data_base"
+    SQLALCHEMY_ECHO = True  # or False depending on your needs
