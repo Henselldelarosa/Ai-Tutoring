@@ -77,7 +77,7 @@ one line:
 # build command - enter all in one line
 npm install --prefix react-app &&
 npm run build --prefix react-app &&
-pip install --upgrade pip command &&
+pip install --upgrade pip &&
 pip install -r requirements.txt &&
 pip install psycopg2 &&
 flask db upgrade &&
