@@ -192,7 +192,7 @@ const QuestionAnswer = () => {
 
                     </div>
                   </div>
-                    <button type='submit' className='questions__submit--button'>Generade <RefreshIcon className='question__submit--button-icon'/></button>
+                    <button type='submit' className='questions__submit--button'>Generate <RefreshIcon className='question__submit--button-icon'/></button>
                 </div>
             </form>
 
