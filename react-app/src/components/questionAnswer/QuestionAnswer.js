@@ -51,10 +51,59 @@ const QuestionAnswer = () => {
     }
   };
 
-  // const resetQuestions = (e) => {
-  //   e.preventDefault()
-  //   saveQuestions = []
-  // }
+  const askQuestion = async (e) => {
+    e.preventDefault();
+
+    if(!userQuestion) return;
+    const data = { user_question: userQuestion };
+    try {
+      const response = await fetch('/api/openai/answer_question', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+      console.log(response)
+      const answer = await response.json();
+      setFeedback(answer.generated_answer);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const gradeResponse = async (e) => {
+    e.preventDefault();
+
+    if(!question){
+      alert('You must generate a question first');
+      return;
+    }
+    if(!answer){
+      alert('Type your answer in order to receive feedback');
+    }
+
+    // Send the answer to the Flask backend
+    const data = { question, answer };
+    try {
+      const response = await fetch('/api/openai/grade_response', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      // Handle the response as needed
+      const f = await response.json();
+      setFeedback(f.feedback);
+
+    } catch (error) {
+      // Handle any errors
+      console.error(error);
+    }
+  };
+
 
   console.log(question)
   return (
@@ -192,16 +241,61 @@ const QuestionAnswer = () => {
 
                     </div>
                   </div>
-                    <button type='submit' className='questions__submit--button'>Generate <RefreshIcon className='question__submit--button-icon'/></button>
+                    <button type='submit' className='questions__submit--button btt'>Generade <RefreshIcon className='question__submit--button-icon'/></button>
                 </div>
             </form>
 
             <div className='hr__section'>
               <span className='hr__span'>OR</span>
+
+              <form className='questions__user--question-form'onSubmit={askQuestion}>
+                <input
+                type="text"
+                className="questions__own--input"
+                placeholder='Ask Your Own Question'
+                value={userQuestion}
+                onChange={(e) => setUserQuestion(e.target.value)}
+                />
+
+                <button className='questions__ask btt'type='submit'>Ask Your Question</button>
+              </form>
             </div>
 
             <div className="questions__show">
-              {question}
+              {question.length !==0 && (
+                <div className='questions__own--answer'>
+                  <form className='questions__own--form' onSubmit={gradeResponse}>
+                  <p className='questions__own--ai-question'>{question}</p>
+                  <br />
+                  <div className="question__input--container">
+
+                    <input
+                    type="text"
+                    className="questions__answer--own-input"
+                    placeholder='Enter Answer Here'
+                    value={answer}
+                    onChange={(e) => setAnswer(e.target.value)}
+                    />
+
+                    <button className='questions__user--button-answer btt' type='submit'>Grade</button>
+                  </div>
+                  </form>
+
+                <div className="questions__ai--feedback-container">
+                <h3 className='questions__ai--feedback'>AI Feedback</h3>
+                { feedback ? <p className='questions--ai-display'>{feedback}</p> : ''}
+                </div>
+                </div>
+
+
+              )
+               }
+
+              {/* <form action="">
+
+              </form> */}
+              {/* {question}
+              {feedback ? <p>{feedback}</p> : ''} */}
             </div>
           </div>
         </div>
