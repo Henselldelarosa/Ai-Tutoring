@@ -32,7 +32,6 @@ const Navbar = ({isLoaded}) => {
    else{
     content = (
       <div>
-        hello
       </div>
     )
    }
