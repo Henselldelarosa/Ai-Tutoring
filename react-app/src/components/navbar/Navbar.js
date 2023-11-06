@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 const Navbar = ({isLoaded}) => {
   const sessionUser = useSelector(state => state.session.user)
   let content;
+
   if(sessionUser){
    content = (
     <div className='navbar'>
@@ -17,7 +18,7 @@ const Navbar = ({isLoaded}) => {
           alt=""
           className="navar__left--logo"
           />
-          <h1 className='navbar__left--title'>Course Correct</h1>
+          {/* <h1 className='navbar__left--title'>Course Correct</h1> */}
         </div>
 
         <div className="navbar__right">
@@ -31,11 +32,11 @@ const Navbar = ({isLoaded}) => {
    else{
     content = (
       <div>
-        
+        hello
       </div>
     )
    }
-  return (content, isLoaded)
+  return (isLoaded, content)
 }
 
 export default Navbar

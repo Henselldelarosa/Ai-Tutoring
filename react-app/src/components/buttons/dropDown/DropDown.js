@@ -56,10 +56,10 @@ const DropDown = () => {
           <p className='dropdown__text'>Logout</p>
         </MenuItem>
 
-        <MenuItem className='dropdown__item'onClick={handleLogOut}>
+        {/* <MenuItem className='dropdown__item'onClick={handleLogOut}>
           <QuestionAnswerIcon className='dropdown__icon' style={{fontSize:'2rem'}}/>
           <p className='dropdown__text'>Q/A</p>
-        </MenuItem>
+        </MenuItem> */}
       </Menu>
     </div>
   )

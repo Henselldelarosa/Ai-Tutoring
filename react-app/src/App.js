@@ -7,6 +7,7 @@ import Home from "./pages/home/Home";
 import Signup from "./pages/signup/Signup";
 import Debug from "./components/Debug";
 import Navbar from "./components/navbar/Navbar";
+import index from './components/Navigation/index'
 
 function App() {
   const dispatch = useDispatch();
@@ -15,7 +16,8 @@ function App() {
     dispatch(authenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
 
-  return (<>
+  return (
+    <>
     <Navbar isLoaded={isLoaded}/>
     {isLoaded && (
     <Switch>
