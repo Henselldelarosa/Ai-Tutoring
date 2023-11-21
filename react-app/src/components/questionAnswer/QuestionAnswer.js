@@ -7,6 +7,8 @@ import CalculateOutlinedIcon from '@mui/icons-material/CalculateOutlined';
 import BiotechOutlinedIcon from '@mui/icons-material/BiotechOutlined';
 import QuestionAnswerInput from './QuestionAnswerInput';
 import RefreshIcon from '@mui/icons-material/Refresh';
+import QuestionModalRender from '../questionModal/QuestionModalRender';
+import { Modal } from '../../context/Modal';
 
 const QuestionAnswer = () => {
   const [difficulty, setDifficulty] = useState(null);
@@ -15,6 +17,8 @@ const QuestionAnswer = () => {
   const [answer, setAnswer] = useState('');
   const [feedback, setFeedback] = useState('');
   const [userQuestion, setUserQuestion] = useState('');
+  const [showModal, setShowModal] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   let saveQuestions = []
   console.log(subject)
@@ -31,6 +35,7 @@ const QuestionAnswer = () => {
 
     // Send the selected options to the Flask backend
     const data = { difficulty, subject };
+    setLoading(true)
     try {
       const response = await fetch('/api/openai/generate_question', {
         method: 'POST',
@@ -41,14 +46,17 @@ const QuestionAnswer = () => {
       });
 
       // Handle the response as needed
-      const q = await response.json()
-      setQuestion([q.question]);
-      console.log(q)
+
+      if(response.ok){
+        const q = await response.json()
+        setLoading(false)
+        setQuestion([q.question])
+      }
 
     } catch (error) {
-      // Handle any errors
       console.error(error);
     }
+    setLoading(false)
   };
 
   const askQuestion = async (e) => {
@@ -241,9 +249,21 @@ const QuestionAnswer = () => {
 
                     </div>
                   </div>
-                    <button type='submit' className='questions__submit--button btt'>Generade <RefreshIcon className='question__submit--button-icon'/></button>
+                  {loading && <p>...Loading</p>}
+                    <button onClick={()=> setShowModal(true)}type='submit' className='questions__submit--button btt'>Generade Question<RefreshIcon className='question__submit--button-icon'/></button>
+
                 </div>
             </form>
+
+            {showModal && (
+                    <QuestionModalRender
+                    showModal={showModal}
+                    setShowModal={setShowModal}
+                    question={question}
+                    answer={answer}
+                    subject={subject}
+                    type='submit'/>
+            )}
 
             <div className='hr__section'>
               <span className='hr__span'>OR</span>
@@ -254,6 +274,7 @@ const QuestionAnswer = () => {
                 className="questions__own--input"
                 placeholder='Ask Your Own Question'
                 value={userQuestion}
+
                 onChange={(e) => setUserQuestion(e.target.value)}
                 />
 
@@ -261,7 +282,7 @@ const QuestionAnswer = () => {
               </form>
             </div>
 
-            <div className="questions__show">
+            {/* <div className="questions__show">
               {question.length !==0 && (
                 <div className='questions__own--answer'>
                   <form className='questions__own--form' onSubmit={gradeResponse}>
@@ -289,14 +310,14 @@ const QuestionAnswer = () => {
 
 
               )
-               }
+               } */}
 
               {/* <form action="">
 
               </form> */}
               {/* {question}
               {feedback ? <p>{feedback}</p> : ''} */}
-            </div>
+            {/* </div> */}
           </div>
         </div>
       </div>
